@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bean Prank</title>
+    <style>
+        img {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            transition: transform 1s ease;
+        }
+    </style>
+</head>
+<body>
+    <audio id="sound" src="bean_sound.mp3" preload="auto"></audio>
+    <script>
+        const images = ['bean1.jpg', 'bean2.jpg', 'bean3.jpg', 'bean4.jpg', 'bean5.jpg', 'bean6.jpg', 'bean7.jpg', 'bean8.jpg', 'bean9.jpg', 'bean10.jpg'];
+        const sound = document.getElementById('sound');
+        sound.volume = 1.0; // Sets volume to maximum
+        let imageCount = 0;
+
+        function showImage() {
+            if (imageCount < images.length) {
+                const img = document.createElement('img');
+                img.src = images[imageCount];
+                img.style.left = `${Math.random() * window.innerWidth}px`;
+                img.style.top = `${Math.random() * window.innerHeight}px`;
+                document.body.appendChild(img);
+
+                // Animate the image
+                setInterval(() => {
+                    img.style.transform = `translate(${Math.random() * 100}px, ${Math.random() * 100}px)`;
+                }, 1000);
+
+                sound.play();
+                imageCount++;
+                setTimeout(showImage, 1000);
+            }
+        }
+
+        showImage();
+    </script>
+</body>
+</html>
